@@ -1,0 +1,1906 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alfez Khan | AppSec Engineer / Pen Tester / Ethical Hacker</title>
+  <meta name="description" content="Cybersecurity Portfolio of Alfez Khan - Ethical Hacker, Penetration Tester, and SOC Analyst specializing in VAPT, Threat Intelligence, and Network Defense." />
+
+  <!-- Google Fonts: Space Grotesk & Fira Code (Cyber Aesthetic) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    /* ==========================================================================
+       CYBERSECURITY THEME VARIABLES
+       ========================================================================== */
+    :root {
+      --bg-primary: #050811;
+      --bg-secondary: #0b1120;
+      --bg-card: rgba(11, 17, 32, 0.85);
+      --bg-card-hover: rgba(16, 26, 46, 0.95);
+      --border-color: rgba(0, 240, 255, 0.15);
+      --border-hover: rgba(0, 240, 255, 0.6);
+
+      --text-primary: #f0fdf4;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+
+      /* Cyber Neon Accents */
+      --cyber-neon: #00ff66;       /* Hacker Green */
+      --cyber-cyan: #00f0ff;       /* Terminal Cyan */
+      --cyber-purple: #a855f7;     /* Purple Glow */
+      --cyber-red: #ef4444;        /* Alert Red */
+      --cyber-yellow: #f59e0b;     /* Warning Amber */
+      --accent-glow: rgba(0, 255, 102, 0.25);
+      --cyan-glow: rgba(0, 240, 255, 0.25);
+
+      --gradient-cyber: linear-gradient(135deg, #00ff66 0%, #00f0ff 50%, #3b82f6 100%);
+      --gradient-dark: linear-gradient(180deg, rgba(5, 8, 17, 0.9) 0%, rgba(11, 17, 32, 0.95) 100%);
+
+      --shadow-cyber: 0 0 20px rgba(0, 240, 255, 0.25);
+      --shadow-neon: 0 0 20px rgba(0, 255, 102, 0.25);
+
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-full: 9999px;
+
+      --font-mono: 'Fira Code', monospace;
+      --font-main: 'Space Grotesk', -apple-system, sans-serif;
+
+      --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Light Theme (Stealth Mode) */
+    [data-theme="light"] {
+      --bg-primary: #f1f5f9;
+      --bg-secondary: #e2e8f0;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-card-hover: rgba(255, 255, 255, 1);
+      --border-color: rgba(15, 23, 42, 0.15);
+      --border-hover: rgba(16, 185, 129, 0.7);
+
+      --text-primary: #0f172a;
+      --text-secondary: #334155;
+      --text-muted: #64748b;
+
+      --cyber-neon: #059669;
+      --cyber-cyan: #0284c7;
+      --accent-glow: rgba(5, 150, 105, 0.15);
+      --cyan-glow: rgba(2, 132, 199, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+      transition: background-color var(--transition-normal), color var(--transition-normal);
+    }
+
+    /* Matrix Digital Canvas */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.22;
+    }
+
+    /* Scanline Overlay Effect */
+    body::before {
+      content: " ";
+      display: block;
+      position: fixed;
+      top: 0; left: 0; bottom: 0; right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+      z-index: 99;
+      background-size: 100% 3px, 6px 100%;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    a { text-decoration: none; color: inherit; transition: all var(--transition-fast); }
+    ul { list-style: none; }
+    button, input, textarea { font-family: inherit; outline: none; border: none; }
+
+    /* Custom Cyber Scrollbar */
+    ::-webkit-scrollbar { width: 7px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--cyber-cyan);
+      border-radius: var(--radius-full);
+      box-shadow: 0 0 8px var(--cyber-cyan);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .font-mono { font-family: var(--font-mono); }
+
+    .gradient-cyber-text {
+      background: var(--gradient-cyber);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      font-weight: 700;
+    }
+
+    .text-neon { color: var(--cyber-neon) !important; }
+    .text-cyan { color: var(--cyber-cyan) !important; }
+    .text-red { color: var(--cyber-red) !important; }
+
+    /* Glassmorphic Cyber Card */
+    .cyber-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      position: relative;
+      transition: all var(--transition-normal);
+    }
+    .cyber-card:hover {
+      border-color: var(--border-hover);
+      box-shadow: var(--shadow-cyber);
+      transform: translateY(-4px);
+    }
+
+    /* Ambient Glow Spots */
+    .cyber-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(140px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.28;
+    }
+    .glow-1 { top: 5%; left: -5%; width: 450px; height: 450px; background: var(--cyber-neon); }
+    .glow-2 { top: 40%; right: -5%; width: 500px; height: 500px; background: var(--cyber-cyan); }
+    .glow-3 { bottom: 10%; left: 10%; width: 400px; height: 400px; background: #6366f1; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.75rem 1.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font-mono);
+      letter-spacing: 0.5px;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .btn-cyber-primary {
+      background: var(--cyber-neon);
+      color: #050811;
+      font-weight: 700;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+    }
+    .btn-cyber-primary:hover {
+      background: #33ff85;
+      box-shadow: 0 0 25px rgba(0, 255, 102, 0.7);
+      transform: translateY(-2px);
+    }
+
+    .btn-cyber-outline {
+      background: transparent;
+      color: var(--cyber-cyan);
+      border: 1px solid var(--cyber-cyan);
+      box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.1);
+    }
+    .btn-cyber-outline:hover {
+      background: rgba(0, 240, 255, 0.15);
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .btn-whatsapp {
+      background: #25d366;
+      color: #ffffff;
+      box-shadow: 0 0 15px rgba(37, 211, 102, 0.35);
+    }
+    .btn-whatsapp:hover {
+      background: #20bd5a;
+      box-shadow: 0 0 25px rgba(37, 211, 102, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-sm { padding: 0.45rem 1.1rem; font-size: 0.85rem; }
+
+    /* NAVBAR */
+    .navbar-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1rem 0;
+      background: rgba(5, 8, 17, 0.85);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--border-color);
+      transition: all var(--transition-normal);
+    }
+
+    .nav-container { display: flex; align-items: center; justify-content: space-between; }
+    
+    .nav-logo {
+      font-family: var(--font-mono);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .logo-prefix { color: var(--cyber-neon); }
+    .logo-accent { color: var(--cyber-cyan); }
+
+    .nav-menu { display: flex; align-items: center; }
+    .nav-list { display: flex; align-items: center; gap: 1.6rem; }
+
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      position: relative;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--cyber-cyan);
+      text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+    }
+    .nav-link::before {
+      content: '> ';
+      color: var(--cyber-neon);
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+    .nav-link:hover::before, .nav-link.active::before { opacity: 1; }
+
+    .nav-actions { display: flex; align-items: center; gap: 1rem; }
+
+    .theme-toggle-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--cyber-cyan);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all var(--transition-fast);
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--cyber-neon);
+      color: var(--cyber-neon);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+
+    [data-theme="dark"] .sun-icon { display: block; }
+    [data-theme="dark"] .moon-icon { display: none; }
+    [data-theme="light"] .sun-icon { display: none; }
+    [data-theme="light"] .moon-icon { display: block; }
+
+    .hamburger-btn {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: transparent;
+      cursor: pointer;
+    }
+    .hamburger-btn span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--cyber-cyan);
+      border-radius: 2px;
+    }
+
+    /* HERO SECTION */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 7.5rem 0 4rem;
+      z-index: 1;
+    }
+
+    .hero-container {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.4rem 1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 255, 102, 0.1);
+      border: 1px solid rgba(0, 255, 102, 0.4);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cyber-neon);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 10px rgba(0, 255, 102, 0.2);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--cyber-neon);
+      box-shadow: 0 0 10px var(--cyber-neon);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(0, 255, 102, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+    }
+
+    .hero-title {
+      font-size: 3.4rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .typing-container {
+      font-family: var(--font-mono);
+      font-size: 1.45rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .typing-text { color: var(--cyber-cyan); font-weight: 700; margin-left: 0.4rem; text-shadow: 0 0 8px rgba(0, 240, 255, 0.5); }
+    .typing-cursor { color: var(--cyber-neon); animation: blink 0.8s infinite; font-weight: bold; }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    .hero-description {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 550px;
+      margin-bottom: 2.2rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-socials { display: flex; align-items: center; gap: 1.2rem; }
+    .socials-label { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted); }
+    .social-icons { display: flex; align-items: center; gap: 0.8rem; }
+
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      transition: all var(--transition-fast);
+    }
+    .social-icon:hover {
+      color: #050811;
+      background: var(--cyber-cyan);
+      border-color: var(--cyber-cyan);
+      box-shadow: 0 0 15px var(--cyber-cyan);
+      transform: translateY(-3px);
+    }
+
+    /* INTERACTIVE CYBER TERMINAL COMPONENT */
+    .terminal-window {
+      background: #090d16;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.15);
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+    }
+
+    .terminal-header {
+      background: #111827;
+      padding: 0.65rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .terminal-dots { display: flex; gap: 0.45rem; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+
+    .terminal-title { font-size: 0.8rem; color: var(--text-muted); }
+
+    .terminal-body {
+      padding: 1.2rem;
+      min-height: 290px;
+      max-height: 340px;
+      overflow-y: auto;
+      color: #e2e8f0;
+    }
+
+    .terminal-output {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .terminal-input-row {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .prompt-label { color: var(--cyber-neon); font-weight: 600; }
+    .terminal-input {
+      background: transparent;
+      color: var(--cyber-cyan);
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    .terminal-shortcuts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding: 0.6rem 1rem;
+      background: #0f172a;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .cmd-pill {
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      color: var(--cyber-cyan);
+      font-size: 0.75rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font-mono);
+    }
+    .cmd-pill:hover {
+      background: var(--cyber-cyan);
+      color: #050811;
+    }
+
+    /* SECTIONS COMMON */
+    .section {
+      padding: 6rem 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-header { text-align: center; max-width: 700px; margin: 0 auto 4rem; }
+
+    .section-tag {
+      display: inline-block;
+      padding: 0.35rem 0.9rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--cyber-neon);
+      background: rgba(0, 255, 102, 0.1);
+      border: 1px solid rgba(0, 255, 102, 0.3);
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      letter-spacing: -0.5px;
+    }
+    .section-subtitle { font-size: 1.05rem; color: var(--text-secondary); }
+
+    /* ABOUT & STATS SECTION */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .about-card { padding: 2.5rem; }
+
+    .about-card-title {
+      font-family: var(--font-mono);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      color: var(--cyber-cyan);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .about-text {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .personal-info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+    .info-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+    .info-value { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); margin-top: 0.2rem; }
+
+    .stats-cards-wrapper {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stat-card {
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    .stat-icon { font-size: 2.2rem; color: var(--cyber-neon); margin-bottom: 0.8rem; }
+    .stat-number { font-family: var(--font-mono); font-size: 2.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.3rem; }
+    .stat-label { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; }
+
+    /* CYBER SECURITY DOMAINS */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .service-card { padding: 2.5rem; }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--cyber-cyan);
+      margin-bottom: 1.5rem;
+    }
+
+    .service-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.8rem; }
+    .service-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.65; margin-bottom: 1.4rem; }
+
+    .service-points { display: flex; flex-direction: column; gap: 0.6rem; }
+    .service-points li { font-size: 0.9rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.6rem; }
+    .service-points li i { color: var(--cyber-neon); font-size: 0.85rem; }
+
+    /* CYBER ARSENAL & SKILLS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .skill-category-card { padding: 2rem; }
+    .category-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.8rem; }
+    .category-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 255, 102, 0.1);
+      border: 1px solid rgba(0, 255, 102, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--cyber-neon);
+    }
+    .category-title { font-size: 1.2rem; font-weight: 700; }
+
+    .skill-items { display: flex; flex-direction: column; gap: 1.3rem; }
+    .skill-info { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.88rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .skill-progress {
+      width: 100%;
+      height: 7px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-cyber);
+      border-radius: var(--radius-full);
+    }
+
+    .tech-cloud {
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+    }
+    .tech-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 240, 255, 0.05);
+      border: 1px solid var(--border-color);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+    }
+    .tech-badge:hover {
+      color: #050811;
+      background: var(--cyber-cyan);
+      border-color: var(--cyber-cyan);
+      box-shadow: 0 0 15px var(--cyber-cyan);
+      transform: translateY(-2px);
+    }
+
+    /* PROJECTS / LAB OPS */
+    .project-filters {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+      padding: 0.6rem 1.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--cyber-cyan);
+      color: #050811;
+      border-color: var(--cyber-cyan);
+      box-shadow: 0 0 15px var(--cyber-cyan);
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .project-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-preview {
+      position: relative;
+      height: 210px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .preview-1 { background: linear-gradient(135deg, #0f172a, #1e293b); }
+    .preview-2 { background: linear-gradient(135deg, #022c22, #064e3b); }
+    .preview-3 { background: linear-gradient(135deg, #311042, #180928); }
+    .preview-4 { background: linear-gradient(135deg, #1e1b4b, #0f172a); }
+
+    .preview-icon {
+      font-size: 4rem;
+      color: rgba(0, 240, 255, 0.3);
+      transition: transform var(--transition-normal);
+    }
+    .project-card:hover .preview-icon { transform: scale(1.15); color: var(--cyber-cyan); }
+
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(5, 8, 17, 0.85);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+    .project-card:hover .preview-overlay { opacity: 1; }
+
+    .preview-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-sm);
+      background: var(--cyber-cyan);
+      color: #050811;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .preview-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px var(--cyber-cyan);
+    }
+
+    .project-body { padding: 1.8rem; display: flex; flex-direction: column; flex-grow: 1; }
+    .project-tag { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; color: var(--cyber-neon); margin-bottom: 0.5rem; }
+    .project-title { font-size: 1.35rem; font-weight: 700; margin-bottom: 0.8rem; }
+    .project-desc { font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.4rem; flex-grow: 1; }
+
+    .project-tech-stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+    .project-tech-stack span {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      padding: 0.25rem 0.65rem;
+      background: rgba(0, 240, 255, 0.06);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+    }
+
+    .project-links { display: flex; gap: 1.2rem; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+    .btn-link { font-family: var(--font-mono); font-size: 0.88rem; font-weight: 600; display: inline-flex; align-items: center; gap: 0.4rem; color: var(--text-secondary); cursor: pointer; }
+    .btn-link:hover { color: var(--cyber-cyan); }
+    .btn-link.live-link { color: var(--cyber-neon); }
+
+    /* CERTIFICATIONS */
+    .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .cert-card { padding: 2rem; display: flex; align-items: center; gap: 1.2rem; }
+    .cert-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 255, 102, 0.1);
+      border: 1px solid rgba(0, 255, 102, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--cyber-neon);
+      flex-shrink: 0;
+    }
+    .cert-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .cert-issuer { display: block; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-secondary); }
+    .cert-year { display: inline-block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--cyber-cyan); margin-top: 0.3rem; }
+
+    /* CONTACT SECTION */
+    .contact-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 2.5rem; align-items: start; }
+    .contact-info-col { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-card { padding: 1.5rem; display: flex; align-items: center; gap: 1.2rem; }
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-sm);
+      background: rgba(0, 240, 255, 0.1);
+      border: 1px solid var(--border-color);
+      color: var(--cyber-cyan);
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-card-title { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.2rem; }
+    .contact-card-link, .contact-card-text { font-size: 1rem; font-weight: 600; color: var(--text-primary); }
+
+    .contact-form { padding: 2.5rem; display: flex; flex-direction: column; gap: 1.4rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-group label { font-family: var(--font-mono); font-size: 0.88rem; color: var(--text-primary); }
+
+    .input-wrapper { position: relative; display: flex; align-items: center; }
+    .input-wrapper i { position: absolute; left: 1.1rem; color: var(--text-muted); font-size: 1rem; }
+    .input-wrapper input, .input-wrapper textarea {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.8rem;
+      background: rgba(11, 17, 32, 0.7);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      transition: all var(--transition-fast);
+    }
+    .input-wrapper textarea { padding-top: 0.9rem; resize: vertical; }
+    .input-wrapper.textarea-wrapper i { top: 1.1rem; }
+    .input-wrapper input:focus, .input-wrapper textarea:focus {
+      border-color: var(--cyber-cyan);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    }
+
+    .form-feedback {
+      margin-top: 0.5rem;
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      display: none;
+    }
+    .form-feedback.success { display: block; background: rgba(0, 255, 102, 0.15); color: var(--cyber-neon); border: 1px solid var(--cyber-neon); }
+    .form-feedback.error { display: block; background: rgba(239, 68, 68, 0.15); color: var(--cyber-red); border: 1px solid var(--cyber-red); }
+
+    /* MODAL & FOOTER */
+    .project-modal {
+      position: fixed; inset: 0; z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; visibility: hidden; transition: all var(--transition-normal);
+    }
+    .project-modal.active { opacity: 1; visibility: visible; }
+    .modal-overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); }
+    .modal-content {
+      position: relative; width: 100%; max-width: 650px; background: #0b1120; border: 1px solid var(--cyber-cyan); padding: 2.5rem; border-radius: var(--radius-md); z-index: 1; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close-btn {
+      position: absolute; top: 1.2rem; right: 1.2rem; width: 36px; height: 36px; border-radius: var(--radius-sm); background: rgba(255, 255, 255, 0.08); color: var(--text-primary); font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close-btn:hover { background: var(--cyber-red); color: #fff; }
+
+    .footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border-color);
+      position: relative;
+      z-index: 1;
+    }
+    .footer-container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-copy { font-family: var(--font-mono); font-size: 0.88rem; color: var(--text-secondary); }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 992px) {
+      .hero-container { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
+      .hero-content { display: flex; flex-direction: column; align-items: center; }
+      .typing-container { justify-content: center; }
+      .hero-cta-group { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.5rem; }
+      .typing-container { font-size: 1.15rem; }
+      .section-title { font-size: 2rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .stats-cards-wrapper { grid-template-columns: 1fr; }
+      .personal-info-grid { grid-template-columns: 1fr; }
+
+      .hamburger-btn { display: flex; }
+      .nav-cta { display: none; }
+      .nav-menu {
+        position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--bg-secondary); border-left: 1px solid var(--border-color); padding: 6rem 2rem 2rem; flex-direction: column; align-items: flex-start; transition: right var(--transition-normal);
+      }
+      .nav-menu.active { right: 0; }
+      .nav-list { flex-direction: column; align-items: flex-start; gap: 1.5rem; width: 100%; }
+      .nav-link { font-size: 1.05rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Digital Matrix Rain Canvas -->
+  <canvas id="matrix-canvas"></canvas>
+
+  <!-- Ambient Cyber Glows -->
+  <div class="cyber-glow glow-1"></div>
+  <div class="cyber-glow glow-2"></div>
+  <div class="cyber-glow glow-3"></div>
+
+  <!-- Header / Navigation -->
+  <header class="navbar-header" id="navbar">
+    <div class="container nav-container">
+      <a href="#home" class="nav-logo">
+        <span class="logo-prefix">#root@</span>Sameer<span class="logo-accent">_sec:~#</span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="#terminal-sec" class="nav-link">Terminal</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#domains" class="nav-link">Domains</a></li>
+          <li class="nav-item"><a href="#skills" class="nav-link">Arsenal</a></li>
+          <li class="nav-item"><a href="#projects" class="nav-link">Labs/Ops</a></li>
+          <li class="nav-item"><a href="#certifications" class="nav-link">Certs</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme" title="Toggle Dark/Stealth">
+          <i class="fa-solid fa-sun sun-icon"></i>
+          <i class="fa-solid fa-moon moon-icon"></i>
+        </button>
+
+        <!-- CTA Button -->
+        <a href="#contact" class="btn btn-sm btn-cyber-primary nav-cta">Encrypted Contact</a>
+
+        <!-- Mobile Hamburger -->
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle Navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. Hero Section -->
+    <section class="hero-section" id="home">
+      <div class="container hero-container">
+        <div class="hero-content">
+          <div class="badge-pill">
+            <span class="pulse-dot"></span>
+            <span>STATUS: DEFENSE & HUNTING ACTIVE</span>
+          </div>
+
+          <h1 class="hero-title">
+            Hi, I'm <span class="gradient-cyber-text">MOHAMMAD SAMEER</span>
+          </h1>
+
+          <div class="typing-container">
+            <span>&gt; target = </span>
+            <span class="typing-text" id="typing-text"></span>
+            <span class="typing-cursor">_</span>
+          </div>
+
+          <p class="hero-description">
+            Dedicated Cybersecurity Specialist, Penetration Tester, and SOC Analyst with an adversarial mindset. Specializing in Web Application Security (OWASP Top 10), Network Defense, Incident Response, and Vulnerability Assessment.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#projects" class="btn btn-cyber-primary">
+              <i class="fa-solid fa-shield-virus"></i>
+              <span>View Security Ops</span>
+            </a>
+           
+            
+          </div>
+
+          <!-- Socials -->
+          <div class="hero-socials">
+            <span class="socials-label">Handshakes:</span>
+            <div class="social-icons">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="GitHub"><i class="fa-brands fa-github"></i></a>
+              <a href="https://tryhackme.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="TryHackMe"><i class="fa-solid fa-flag"></i></a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="mailto:alfez.cyber@example.com" class="social-icon" title="PGP Mail"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Terminal Simulator Widget -->
+        <div class="hero-visual" id="terminal-sec">
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="terminal-title">@kali-linux: ~</div>
+              <div><i class="fa-solid fa-shield-halved text-neon"></i></div>
+            </div>
+
+            <div class="terminal-body" id="terminal-body">
+              <div class="terminal-output" id="terminal-output">
+                <div><span class="text-neon">[*]</span> Initializing cyber defense shell v2.4.1...</div>
+                <div><span class="text-cyan">[+]</span> Connected: host 127.0.0.1 (AUTH_OK)</div>
+                <div>Type <span class="text-neon">'help'</span> to see all available commands.</div>
+              </div>
+              <div class="terminal-input-row">
+                <span class="prompt-label">sameer@sec:~$</span>
+                <input type="text" id="terminal-input" class="terminal-input" placeholder="type 'help' & enter..." autocomplete="off" />
+              </div>
+            </div>
+
+            <!-- Quick click commands for recruiter/visitor -->
+            <div class="terminal-shortcuts">
+              <span class="cmd-pill" data-cmd="whoami">whoami</span>
+              <span class="cmd-pill" data-cmd="skills">skills</span>
+              <span class="cmd-pill" data-cmd="certs">certs</span>
+              <span class="cmd-pill" data-cmd="projects">projects</span>
+              <span class="cmd-pill" data-cmd="contact">contact</span>
+              <span class="cmd-pill" data-cmd="clear">clear</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. About Me Section -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ 01_PROFILE ]</span>
+          <h2 class="section-title">The Mindset Behind <span class="gradient-cyber-text">The Shield</span></h2>
+          <p class="section-subtitle">Bridging offensive security knowledge to build impenetrable defenses.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card cyber-card">
+            <h3 class="about-card-title"><i class="fa-solid fa-user-ninja"></i> Mission Statement</h3>
+            <p class="about-text">
+              I am a Cybersecurity Practitioner passionate about identifying architectural flaws before malicious actors can exploit them. My journey combines deep technical exploration in ethical hacking, network protocols, cryptography, and digital forensics.
+            </p>
+            <p class="about-text">
+              I actively participate in CTF (Capture The Flag) competitions, analyze real-world malware in isolated sandboxes, and perform penetration tests adhering to industry frameworks like MITRE ATT&CK, OWASP Top 10, and NIST.
+            </p>
+
+            <div class="personal-info-grid">
+              <div class="info-item">
+                <span class="info-label">Specialization:</span>
+                <div class="info-value text-cyan">Penetration Testing & VAPT</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">SOC Operations:</span>
+                <div class="info-value text-neon">Incident Response & SIEM</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Operating Systems:</span>
+                <div class="info-value">Kali Linux, Parrot OS, Windows Server</div>
+              </div>
+              <div class="info-item">
+                <span class="info-label">Availability:</span>
+                <div class="info-value text-neon">Ready for Cyber Roles / Internships</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stats Grid -->
+          <div class="stats-cards-wrapper">
+            <div class="stat-card cyber-card">
+              <div class="stat-icon"><i class="fa-solid fa-crosshairs"></i></div>
+              <div class="stat-number">0</div>
+              <div class="stat-label">Vulnerable Labs Pwned</div>
+            </div>
+            <div class="stat-card cyber-card">
+              <div class="stat-icon"><i class="fa-solid fa-trophy"></i></div>
+              <div class="stat-number">0%</div>
+              <div class="stat-label">TryHackMe Rank</div>
+            </div>
+            <div class="stat-card cyber-card">
+              <div class="stat-icon"><i class="fa-solid fa-bug"></i></div>
+              <div class="stat-number">00</div>
+              <div class="stat-label">Bug Reports Submitted</div>
+            </div>
+            <div class="stat-card cyber-card">
+              <div class="stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+              <div class="stat-number">0%</div>
+              <div class="stat-label">Ethical & Responsible</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Core Domains / What I Do -->
+    <section class="section services-section" id="domains">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ 02_DOMAINS ]</span>
+          <h2 class="section-title">Cyber Security <span class="gradient-cyber-text">Domains</span></h2>
+          <p class="section-subtitle">Offensive simulation and defensive hardening methodologies.</p>
+        </div>
+
+        <div class="services-grid">
+          <!-- Domain 1 -->
+          <div class="service-card cyber-card">
+            <div class="service-icon"><i class="fa-solid fa-unlock-keyhole"></i></div>
+            <h3 class="service-title">Web Application Pentesting (VAPT)</h3>
+            <p class="service-desc">
+              Detecting and exploiting critical vulnerabilities across modern web architectures based on the OWASP Top 10 standards.
+            </p>
+            <ul class="service-points">
+              <li><i class="fa-solid fa-check-double"></i> SQLi, XSS, CSRF, IDOR & SSRF testing</li>
+              <li><i class="fa-solid fa-check-double"></i> Authentication & Session Hijacking bypasses</li>
+              <li><i class="fa-solid fa-check-double"></i> Automated & Manual Burp Suite assessments</li>
+            </ul>
+          </div>
+
+          <!-- Domain 2 -->
+          <div class="service-card cyber-card">
+            <div class="service-icon"><i class="fa-solid fa-network-wired"></i></div>
+            <h3 class="service-title">Network Security & Hardening</h3>
+            <p class="service-desc">
+              Auditing network infrastructures, firewall configurations, packet inspections, and scanning for active attack vectors.
+            </p>
+            <ul class="service-points">
+              <li><i class="fa-solid fa-check-double"></i> Port scanning & service enumeration with Nmap</li>
+              <li><i class="fa-solid fa-check-double"></i> Packet captures & protocol analysis with Wireshark</li>
+              <li><i class="fa-solid fa-check-double"></i> Active Directory enumeration & privilege escalation</li>
+            </ul>
+          </div>
+
+          <!-- Domain 3 -->
+          <div class="service-card cyber-card">
+            <div class="service-icon"><i class="fa-solid fa-tower-broadcast"></i></div>
+            <h3 class="service-title">SOC & Incident Response</h3>
+            <p class="service-desc">
+              Monitoring telemetry, threat intelligence detection, investigating alerts using SIEM, and executing triage protocols.
+            </p>
+            <ul class="service-points">
+              <li><i class="fa-solid fa-check-double"></i> SIEM log monitoring (Splunk, Elastic SIEM)</li>
+              <li><i class="fa-solid fa-check-double"></i> Intrusion Detection Systems (Snort, Suricata)</li>
+              <li><i class="fa-solid fa-check-double"></i> Memory & basic forensic artifact investigation</li>
+            </ul>
+          </div>
+
+          <!-- Domain 4 -->
+          <div class="service-card cyber-card">
+            <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+            <h3 class="service-title">Security Automation & Scripting</h3>
+            <p class="service-desc">
+              Writing tailored security scripts to automate reconnaissance, parsing logs, and creating proof-of-concept exploits.
+            </p>
+            <ul class="service-points">
+              <li><i class="fa-solid fa-check-double"></i> Python custom port scanners & banner grabbers</li>
+              <li><i class="fa-solid fa-check-double"></i> Bash & PowerShell automation scripts</li>
+              <li><i class="fa-solid fa-check-double"></i> API security testing automation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Cyber Arsenal & Skills -->
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ 03_ARSENAL ]</span>
+          <h2 class="section-title">Security Tools & <span class="gradient-cyber-text">Arsenal</span></h2>
+          <p class="section-subtitle">Proficiencies in industry-standard defensive and offensive toolsets.</p>
+        </div>
+
+        <div class="skills-grid">
+          <!-- Category 1 -->
+          <div class="skill-category-card cyber-card">
+            <div class="category-header">
+              <div class="category-icon"><i class="fa-solid fa-bug"></i></div>
+              <h3 class="category-title">Offensive Security</h3>
+            </div>
+            <div class="skill-items">
+              <div>
+                <div class="skill-info"><span>Burp Suite Professional</span><span>92%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 92%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>Nmap & Zenmap</span><span>95%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 95%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>Metasploit Framework</span><span>85%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 85%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>SQLmap & Gobuster</span><span>90%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 90%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div class="skill-category-card cyber-card">
+            <div class="category-header">
+              <div class="category-icon"><i class="fa-solid fa-shield-cat"></i></div>
+              <h3 class="category-title">Defensive & Blue Team</h3>
+            </div>
+            <div class="skill-items">
+              <div>
+                <div class="skill-info"><span>Wireshark & Tcpdump</span><span>90%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 90%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>Splunk & SIEM Log Analysis</span><span>82%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 82%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>Nessus / OpenVAS Scanner</span><span>85%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 85%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>Snort IDS / Suricata</span><span>78%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 78%;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div class="skill-category-card cyber-card">
+            <div class="category-header">
+              <div class="category-icon"><i class="fa-solid fa-terminal"></i></div>
+              <h3 class="category-title">Scripting & Platforms</h3>
+            </div>
+            <div class="skill-items">
+              <div>
+                <div class="skill-info"><span>Python for Cybersecurity</span><span>88%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 88%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>Bash & Linux Shell</span><span>92%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 92%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>PowerShell for SysAdmin/AD</span><span>80%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 80%;"></div></div>
+              </div>
+              <div>
+                <div class="skill-info"><span>Git, Docker & Virtualization</span><span>86%</span></div>
+                <div class="skill-progress"><div class="progress-fill" style="width: 86%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arsenal Badges -->
+        <div class="tech-cloud cyber-card">
+          <span class="tech-badge"><i class="fa-brands fa-linux"></i> Kali Linux</span>
+          <span class="tech-badge"><i class="fa-solid fa-spider"></i> Burp Suite</span>
+          <span class="tech-badge"><i class="fa-solid fa-radar"></i> Nmap</span>
+          <span class="tech-badge"><i class="fa-solid fa-wave-square"></i> Wireshark</span>
+          <span class="tech-badge"><i class="fa-solid fa-chart-area"></i> Splunk</span>
+          <span class="tech-badge"><i class="fa-brands fa-python"></i> Python 3</span>
+          <span class="tech-badge"><i class="fa-solid fa-skull"></i> Metasploit</span>
+          <span class="tech-badge"><i class="fa-solid fa-network-wired"></i> Active Directory</span>
+          <span class="tech-badge"><i class="fa-solid fa-shield-virus"></i> Nessus</span>
+          <span class="tech-badge"><i class="fa-solid fa-key"></i> John The Ripper</span>
+          <span class="tech-badge"><i class="fa-solid fa-lock"></i> Cryptography</span>
+          <span class="tech-badge"><i class="fa-brands fa-docker"></i> Docker Labs</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Featured Security Projects / Lab Operations -->
+    <section class="section projects-section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ 04_SECURITY_OPS ]</span>
+          <h2 class="section-title">Labs & Security <span class="gradient-cyber-text">Projects</span></h2>
+          <p class="section-subtitle">Practical implementations, vulnerability research, and defense setups.</p>
+        </div>
+
+        <div class="project-filters">
+          <button class="filter-btn active" data-filter="all">All Ops</button>
+          <button class="filter-btn" data-filter="offensive">Red Team / VAPT</button>
+          <button class="filter-btn" data-filter="defensive">Blue Team / SOC</button>
+          <button class="filter-btn" data-filter="tools">Security Scripts</button>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card cyber-card" data-category="offensive">
+            <div class="project-preview preview-1">
+              <div class="preview-overlay">
+                <button class="preview-btn view-details-btn" data-project="1" title="Inspect Op"><i class="fa-solid fa-eye"></i></button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="preview-btn" title="Source"><i class="fa-brands fa-github"></i></a>
+              </div>
+              <div class="preview-icon"><i class="fa-solid fa-bug-slash"></i></div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag">Vulnerability Research</div>
+              <h3 class="project-title">Automated OWASP Web Scanner</h3>
+              <p class="project-desc">
+                Python multi-threaded crawler and scanner designed to detect common web vulnerabilities such as SQL injection, Reflected XSS, and header misconfigurations.
+              </p>
+              <div class="project-tech-stack">
+                <span>Python</span>
+                <span>Requests</span>
+                <span>BeautifulSoup</span>
+                <span>OWASP Top 10</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com" target="_blank" class="btn-link"><i class="fa-brands fa-github"></i> Repo</a>
+                <a href="#" class="btn-link live-link view-details-btn" data-project="1"><i class="fa-solid fa-shield-halved"></i> Audit Details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card cyber-card" data-category="defensive">
+            <div class="project-preview preview-2">
+              <div class="preview-overlay">
+                <button class="preview-btn view-details-btn" data-project="2" title="Inspect Op"><i class="fa-solid fa-eye"></i></button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="preview-btn" title="Source"><i class="fa-brands fa-github"></i></a>
+              </div>
+              <div class="preview-icon"><i class="fa-solid fa-shield-cat"></i></div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag">Blue Team & Detection</div>
+              <h3 class="project-title">Snort Network IDS & Threat Lab</h3>
+              <p class="project-desc">
+                Configured an isolated sandbox network to simulate brute force attacks, SYN floods, and malicious payload delivery, generating real-time Snort rule alerts.
+              </p>
+              <div class="project-tech-stack">
+                <span>Snort</span>
+                <span>Wireshark</span>
+                <span>Linux</span>
+                <span>Bash</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com" target="_blank" class="btn-link"><i class="fa-brands fa-github"></i> Repo</a>
+                <a href="#" class="btn-link live-link view-details-btn" data-project="2"><i class="fa-solid fa-shield-halved"></i> Audit Details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card cyber-card" data-category="defensive">
+            <div class="project-preview preview-3">
+              <div class="preview-overlay">
+                <button class="preview-btn view-details-btn" data-project="3" title="Inspect Op"><i class="fa-solid fa-eye"></i></button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="preview-btn" title="Source"><i class="fa-brands fa-github"></i></a>
+              </div>
+              <div class="preview-icon"><i class="fa-solid fa-chart-pie"></i></div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag">SOC Telemetry</div>
+              <h3 class="project-title">Splunk Enterprise SIEM Monitoring</h3>
+              <p class="project-desc">
+                Built custom dashboards tracking failed authentication spikes, port sweeps, and privilege escalation attempts using Windows Event Logs & Sysmon.
+              </p>
+              <div class="project-tech-stack">
+                <span>Splunk</span>
+                <span>Sysmon</span>
+                <span>Windows Server</span>
+                <span>SPL</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com" target="_blank" class="btn-link"><i class="fa-brands fa-github"></i> Repo</a>
+                <a href="#" class="btn-link live-link view-details-btn" data-project="3"><i class="fa-solid fa-shield-halved"></i> Audit Details</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 4 -->
+          <div class="project-card cyber-card" data-category="tools">
+            <div class="project-preview preview-4">
+              <div class="preview-overlay">
+                <button class="preview-btn view-details-btn" data-project="4" title="Inspect Op"><i class="fa-solid fa-eye"></i></button>
+                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="preview-btn" title="Source"><i class="fa-brands fa-github"></i></a>
+              </div>
+              <div class="preview-icon"><i class="fa-solid fa-code-compare"></i></div>
+            </div>
+            <div class="project-body">
+              <div class="project-tag">Security Scripting</div>
+              <h3 class="project-title">Subdomain & Port Recon Engine</h3>
+              <p class="project-desc">
+                High-speed asynchronous Python utility for target reconnaissance, certificate transparency log scraping, and active open port fingerprinting.
+              </p>
+              <div class="project-tech-stack">
+                <span>Python Asyncio</span>
+                <span>Sockets</span>
+                <span>DNS Recon</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com" target="_blank" class="btn-link"><i class="fa-brands fa-github"></i> Repo</a>
+                <a href="#" class="btn-link live-link view-details-btn" data-project="4"><i class="fa-solid fa-shield-halved"></i> Audit Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Certifications & Badges -->
+    <section class="section certs-section" id="certifications">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ 05_ACCREDITATIONS ]</span>
+          <h2 class="section-title">Certifications & <span class="gradient-cyber-text">Credentials</span></h2>
+          <p class="section-subtitle">Verified validations in cybersecurity theory and hands-on offensive/defensive tradecraft.</p>
+        </div>
+
+        <div class="certs-grid">
+          <div class="cert-card cyber-card">
+            <div class="cert-icon"><i class="fa-solid fa-shield-heart"></i></div>
+            
+          </div>
+
+          <div class="cert-card cyber-card">
+            <div class="cert-icon"><i class="fa-brands fa-google"></i></div>
+           
+          </div>
+
+          <div class="cert-card cyber-card">
+            <div class="cert-icon"><i class="fa-solid fa-flag"></i></div>
+           
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Contact Section -->
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">[ 06_DISPATCH ]</span>
+          <h2 class="section-title">Initiate <span class="gradient-cyber-text">Contact</span></h2>
+          <p class="section-subtitle">Available for security audits, SOC analysis, internships, and research collaborations.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info-col">
+            <div class="contact-card cyber-card">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <div class="contact-card-title">Encrypted Mail</div>
+                <a href="mailto:ayesha.cyber@example.com" class="contact-card-link">itzmdsameer2005@gmail.com</a>
+              </div>
+            </div>
+
+          
+              
+            </div>
+
+            <div class="contact-card cyber-card">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <div class="contact-card-title">Base Coordinates</div>
+                <p class="contact-card-text">India (Worldwide Remote Available)</p>
+              </div>
+            </div>
+
+           
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-col">
+            <form class="contact-form cyber-card" id="contact-form">
+              <div class="form-group">
+                <label for="name">&gt; Your Name / Organization</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-user-secret"></i>
+                  <input type="text" id="name" name="name" placeholder="John Doe / Acme Corp" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">&gt; Contact Email</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-at"></i>
+                  <input type="email" id="email" name="email" placeholder="security@organization.com" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="subject">&gt; Classification / Subject</label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-tag"></i>
+                  <input type="text" id="subject" name="subject" placeholder="Security Audit Inquiry / SOC Opportunity" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="message">&gt; Message Payload</label>
+                <div class="input-wrapper textarea-wrapper">
+                  <i class="fa-solid fa-code"></i>
+                  <textarea id="message" name="message" rows="5" placeholder="Enter encrypted or plaintext details of your request..." required></textarea>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-cyber-primary" id="submit-btn">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Transmit Message</span>
+              </button>
+
+              <div class="form-feedback" id="form-feedback"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Project Details Modal -->
+  <div class="project-modal" id="project-modal">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-content">
+      <button class="modal-close-btn" id="modal-close">&times;</button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-left">
+        <span class="font-mono text-neon">&gt; MOHAMMAD SAMEER | Defense & Attack Engineering</span>
+      </div>
+      <div class="footer-right">
+        <p class="footer-copy">&copy; <span id="current-year"></span> All operations strictly ethical & authorized.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /**
+     * Cybersecurity Portfolio Interactive Script
+     * Matrix Rain, Terminal Simulator, Command Runner & Filtering
+     */
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Dynamic Year
+      const yearSpan = document.getElementById('current-year');
+      if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+      // 2. Matrix Digital Rain Canvas Effect
+      const canvas = document.getElementById('matrix-canvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        function resizeMatrix() {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        }
+        resizeMatrix();
+        window.addEventListener('resize', resizeMatrix);
+
+        const chars = '0123456789ABCDEF<>/*&^%$#@!+-=~{}[]|;:,';
+        const fontSize = 14;
+        const columns = Math.floor(canvas.width / fontSize);
+        const drops = Array(columns).fill(1);
+
+        function drawMatrix() {
+          ctx.fillStyle = 'rgba(5, 8, 17, 0.08)';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+          ctx.fillStyle = '#00ff66';
+          ctx.font = `${fontSize}px 'Fira Code', monospace`;
+
+          for (let i = 0; i < drops.length; i++) {
+            const text = chars.charAt(Math.floor(Math.random() * chars.length));
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+            drops[i]++;
+          }
+        }
+        setInterval(drawMatrix, 35);
+      }
+
+      // 3. Dynamic Typing Effect (Cyber Targets)
+      const targets = [
+        'Vulnerability Assessment (VAPT).',
+        'Web Application Pentesting.',
+        'Network Defense & Hardening.',
+        'SOC Alert Triage & SIEM Logs.',
+        'Threat Hunting & Detection.'
+      ];
+      let tIndex = 0, charIndex = 0, isDeleting = false;
+      const typeEl = document.getElementById('typing-text');
+
+      function typeCyber() {
+        if (!typeEl) return;
+        const currentTarget = targets[tIndex];
+
+        if (isDeleting) {
+          typeEl.textContent = currentTarget.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typeEl.textContent = currentTarget.substring(0, charIndex + 1);
+          charIndex++;
+        }
+
+        let speed = isDeleting ? 40 : 80;
+        if (!isDeleting && charIndex === currentTarget.length) {
+          speed = 1800;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          tIndex = (tIndex + 1) % targets.length;
+          speed = 500;
+        }
+        setTimeout(typeCyber, speed);
+      }
+      typeCyber();
+
+      // 4. Interactive Terminal Emulator
+      const termInput = document.getElementById('terminal-input');
+      const termOutput = document.getElementById('terminal-output');
+      const termBody = document.getElementById('terminal-body');
+
+      const cyberCommands = {
+        'help': `Available commands:
+  <span class="text-cyan">whoami</span>    - Display profile overview
+  <span class="text-cyan">skills</span>    - List offensive & defensive capabilities
+  <span class="text-cyan">certs</span>     - Show active credentials
+  <span class="text-cyan">projects</span>  - Show security ops and labs
+  <span class="text-cyan">contact</span>   - Get direct contact channels
+  <span class="text-cyan">clear</span>     - Clear terminal buffer`,
+        'whoami': `<span class="text-neon">MOHAMMAD SAMEER</span> | Cybersecurity Specialist & Ethical Hacker. Focused on Web VAPT, Network Audits, and Threat Response.`,
+        'skills': `<span class="text-neon">[Arsenal]</span>
+  • Offensive: Burp Suite, Nmap, Metasploit, SQLmap, Gobuster
+  • Defensive: Wireshark, Splunk, Snort IDS, Nessus, Sysmon
+  • Scripting: Python, Bash, PowerShell, C`,
+        'certs': `<span class="text-neon">[Credentials]</span>
+  • Google Cybersecurity Professional Certificate
+  • CompTIA Security+ (SY0-701) [Targeted]
+  • TryHackMe Top 2% Global Hacker Badge`,
+        'projects': `<span class="text-neon">[Ops & Labs]</span>
+  1. Automated OWASP Web Scanner (Python)
+  2. Snort Network Intrusion Detection System
+  3. Splunk Enterprise SIEM Lab & Dashboard
+  4. Async Subdomain & Port Recon Engine`,
+        'contact': `Email: alfez.cyber@example.com | WhatsApp: +91 9876543210`
+      };
+
+      function executeCommand(cmd) {
+        const cleanCmd = cmd.trim().toLowerCase();
+        if (!cleanCmd) return;
+
+        if (cleanCmd === 'clear') {
+          termOutput.innerHTML = '';
+          return;
+        }
+
+        const userRow = document.createElement('div');
+        userRow.innerHTML = `<span class="prompt-label">sameer@sec:~$</span> ${cmd}`;
+        termOutput.appendChild(userRow);
+
+        const responseRow = document.createElement('div');
+        if (cyberCommands[cleanCmd]) {
+          responseRow.innerHTML = cyberCommands[cleanCmd].replace(/\n/g, '<br/>');
+        } else {
+          responseRow.innerHTML = `<span class="text-red">zsh: command not found: ${cleanCmd}</span>. Type <span class="text-neon">'help'</span> for reference.`;
+        }
+        termOutput.appendChild(responseRow);
+        termBody.scrollTop = termBody.scrollHeight;
+      }
+
+      if (termInput) {
+        termInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            executeCommand(termInput.value);
+            termInput.value = '';
+          }
+        });
+      }
+
+      // Quick Shortcut buttons for terminal
+      document.querySelectorAll('.cmd-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          const cmd = pill.getAttribute('data-cmd');
+          executeCommand(cmd);
+        });
+      });
+
+      // 5. Dark / Stealth Theme Switcher
+      const themeToggle = document.getElementById('theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        const curTheme = document.documentElement.getAttribute('data-theme');
+        const nextTheme = curTheme === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', nextTheme);
+      });
+
+      // 6. Mobile Navigation
+      const hamburger = document.getElementById('hamburger-btn');
+      const navMenu = document.getElementById('nav-menu');
+      if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => navMenu.classList.toggle('active'));
+        document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => navMenu.classList.remove('active')));
+      }
+
+      // 7. Project Filtering
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const filter = btn.getAttribute('data-filter');
+
+          projectCards.forEach(card => {
+            const cat = card.getAttribute('data-category');
+            if (filter === 'all' || cat === filter) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 8. Security Project Modal Details
+      const projectDetails = {
+        '1': {
+          title: 'Automated OWASP Web Vulnerability Scanner',
+          domain: 'Red Team / Application Pentesting',
+          description: 'A modular asynchronous scanner designed in Python to automate the initial discovery of high-severity vulnerabilities across client web services without causing denial of service.',
+          highlights: [
+            'Tested for SQL injection with custom payload reflection timing',
+            'Discovered Reflected Cross-Site Scripting (XSS) in URL parameters',
+            'Checked security headers (CSP, X-Frame-Options, HSTS, CORS)',
+            'Exported audit results directly into Markdown and JSON formats'
+          ],
+          tools: ['Python 3', 'Requests', 'BeautifulSoup', 'OWASP Top 10', 'Regex']
+        },
+        '2': {
+          title: 'Snort Network Intrusion Detection Lab',
+          domain: 'Blue Team / Network Traffic Analysis',
+          description: 'Constructed an enterprise-like network sandbox on virtual machines to monitor, alert, and drop malicious packets based on custom-written Snort signatures.',
+          highlights: [
+            'Configured live packet capture and inspection for ICMP flood & SYN flood',
+            'Authored custom detection rules for Nmap aggressive port scans',
+            'Integrated alerts into centralized logging files for quick triaging',
+            'Analyzed malicious PCAP dumps to trace attacker IP and methodology'
+          ],
+          tools: ['Snort IDS', 'Wireshark', 'Kali Linux', 'Ubuntu Server', 'Bash']
+        },
+        '3': {
+          title: 'Splunk Enterprise SIEM Security Monitoring',
+          domain: 'SOC Operations / Threat Intelligence',
+          description: 'Deployed a functional SIEM platform ingesting Windows Active Directory domain controller event logs, Sysmon process telemetry, and firewall logs.',
+          highlights: [
+            'Created alert thresholds for brute-force attacks (Event ID 4625)',
+            'Constructed queries using SPL (Search Processing Language) to identify suspicious PowerShell execution',
+            'Mapped detected alerts against MITRE ATT&CK framework techniques',
+            'Visualized attack timelines for fast post-incident analysis'
+          ],
+          tools: ['Splunk', 'Windows Sysmon', 'MITRE ATT&CK', 'Event Logs']
+        },
+        '4': {
+          title: 'Asynchronous Subdomain & Port Recon Engine',
+          domain: 'Offensive Reconnaissance & Automation',
+          description: 'High-speed Python reconnaissance tool capable of resolving thousands of potential subdomains via DNS queries, certificate transparency scraping, and rapid port probing.',
+          highlights: [
+            'High concurrency using Python asyncio and socket libraries',
+            'Integrated Certificate Transparency (crt.sh) API queries',
+            'Accurate web server banner grabbing and HTTP status code tracking',
+            'Decreased manual reconnaissance time by over 70%'
+          ],
+          tools: ['Python Asyncio', 'Sockets', 'DNS Protocol', 'API Integration']
+        }
+      };
+
+      const modal = document.getElementById('project-modal');
+      const modalBody = document.getElementById('modal-body');
+      const modalClose = document.getElementById('modal-close');
+      const modalOverlay = document.getElementById('modal-overlay');
+
+      document.querySelectorAll('.view-details-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const pid = btn.getAttribute('data-project');
+          const data = projectDetails[pid];
+          if (data && modal && modalBody) {
+            modalBody.innerHTML = `
+              <div style="margin-bottom: 1rem;">
+                <span class="project-tag">${data.domain}</span>
+                <h2 style="font-size: 1.5rem; margin-top: 0.3rem; color: var(--cyber-cyan);">${data.title}</h2>
+              </div>
+              <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 1.5rem;">${data.description}</p>
+              
+              <h4 style="font-size: 0.95rem; margin-bottom: 0.8rem; font-family: var(--font-mono); color: var(--cyber-neon);">&gt; Key Audit Findings & Methodology:</h4>
+              <ul style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                ${data.highlights.map(h => `<li style="font-size: 0.88rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.6rem;"><i class="fa-solid fa-shield-check" style="color: var(--cyber-neon);"></i> ${h}</li>`).join('')}
+              </ul>
+
+              <h4 style="font-size: 0.95rem; margin-bottom: 0.8rem; font-family: var(--font-mono); color: var(--cyber-neon);">&gt; Toolset:</h4>
+              <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;">
+                ${data.tools.map(t => `<span style="padding: 0.3rem 0.8rem; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--border-color); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-primary);">${t}</span>`).join('')}
+              </div>
+
+              <div style="display: flex; gap: 1rem;">
+                <a href="https://github.com" target="_blank" class="btn btn-cyber-primary btn-sm"><i class="fa-brands fa-github"></i> View Exploit Code</a>
+              </div>
+            `;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      function closeModal() {
+        if (modal) {
+          modal.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+      if (modalClose) modalClose.addEventListener('click', closeModal);
+      if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+
+      // 9. Contact Form Simulation
+      const contactForm = document.getElementById('contact-form');
+      const submitBtn = document.getElementById('submit-btn');
+      const feedback = document.getElementById('form-feedback');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Encrypting & Sending...`;
+
+          setTimeout(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Transmit Message`;
+            feedback.textContent = '[SUCCESS] Message encrypted and securely transmitted to Alfez Khan.';
+            feedback.className = 'form-feedback success';
+            contactForm.reset();
+
+            setTimeout(() => { feedback.style.display = 'none'; }, 6000);
+          }, 1200);
+        });
+      }
+
+      // 10. CV Button
+      const cvBtn = document.getElementById('cv-btn');
+      if (cvBtn) {
+        cvBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('[NOTICE] To enable resume download, place your cybersecurity resume PDF as "resume.pdf" in this folder and link it in index.html!');
+        });
+      }
+    });
+  </script>
+</body>
+</html>
